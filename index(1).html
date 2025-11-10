@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedBuild3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <!-- زر الإعدادات الجديد - هذا هو التعديل الوحيد -->
+            <a href="settings.html" class="settings-btn">
+                <i class="fas fa-ellipsis-v"></i>
+            </a>
+            
+            <div class="logo">
+                <i class="fas fa-stethoscope"></i>
+            </div>
+            <h1 class="app-title">MedBuild3D</h1>
+            <div class="developer-name">Saad Zaki Ibrahim</div>
+            <p class="app-subtitle">تفكيك الأجهزة الطبية</p>
+        </header>
+        
+        <main class="main-content">
+            <div class="features-grid">
+                <!-- زر النظري -->
+                <div class="feature-card theory" onclick="navigateTo('theory')">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-medical"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h2 class="feature-title">النظري</h2>
+                        <p class="feature-description">شروحات الأجهزة الطبية</p>
+                    </div>
+                    <div class="feature-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+                
+                <!-- زر العملي -->
+                <div class="feature-card practice" onclick="navigateTo('practice')">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h2 class="feature-title">العملي</h2>
+                        <p class="feature-description">تدريب تفكيك وتجميع</p>
+                    </div>
+                    <div class="feature-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+                
+                <!-- زر الاختبارات -->
+                <div class="feature-card tests" onclick="navigateTo('tests')">
+                    <div class="feature-icon">
+                        <i class="fas fa-star-of-life"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h2 class="feature-title">الاختبارات</h2>
+                        <p class="feature-description">أسئلة وتقييم المستوى</p>
+                    </div>
+                    <div class="feature-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="app-footer">
+            <div class="copyright">جميع الحقوق محفوظة لدى MedBuild3D</div>
+            <div class="year">© 2026</div>
+        </footer>
+    </div>
+
+    <script>
+        function navigateTo(section) {
+            const messages = {
+                'theory': 'فتح قسم الشروحات النظرية',
+                'practice': 'فتح ورشة العمل التدريبية', 
+                'tests': 'فتح قسم الاختبارات'
+            };
+            
+            // تأثير النقر
+            event.currentTarget.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                event.currentTarget.style.transform = '';
+            }, 150);
+        }
+    </script>
+</body>
+</html>

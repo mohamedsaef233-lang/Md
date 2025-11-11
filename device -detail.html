@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جهاز تخطيط القلب - MedBuild3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .device-header {
+            background: linear-gradient(135deg, var(--medical-blue), var(--medical-teal));
+            color: white;
+            padding: 30px 25px;
+            position: relative;
+        }
+        
+        .device-settings-btn {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .device-settings-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .device-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .device-category {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        /* Navigation Tabs */
+        .tabs-container {
+            display: flex;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .tab {
+            padding: 18px 20px;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .tab.active {
+            color: var(--medical-blue);
+            border-bottom-color: var(--medical-blue);
+        }
+        
+        /* Content Sections */
+        .tab-content {
+            display: none;
+            padding: 25px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--medical-blue);
+        }
+        
+        /* Theory Section */
+        .device-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        
+        .theory-content {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: var(--radius);
+            border-right: 4px solid var(--medical-blue);
+        }
+        
+        .theory-content h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .theory-content p {
+            margin-bottom: 15px;
+            color: #475569;
+        }
+        
+        /* Steps Section */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .step-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            border-color: var(--medical-blue);
+            box-shadow: var(--shadow);
+        }
+        
+        .step-number {
+            background: var(--medical-blue);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .step-content p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        
+        /* Safety Section */
+        .safety-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .safety-card {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        
+        .safety-card.warning {
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+        
+        .safety-icon {
+            color: #ea580c;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        
+        .safety-card.warning .safety-icon {
+            color: #dc2626;
+        }
+        
+        /* Action Buttons */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .action-btn {
+            background: var(--medical-blue);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .action-btn.practice {
+            background: var(--medical-green);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .device-header {
+                padding: 25px 20px;
+            }
+            
+            .tab {
+                padding: 15px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .tab-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="device-header">
+            <!-- زر الإعدادات -->
+            <a href="settings.html" class="device-settings-btn">
+                <i class="fas fa-ellipsis-v"></i>
+            </a>
+            
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <h1 class="device-title">جهاز تخطيط القلب</h1>
+            <p class="device-category">ECG Machine - أجهزة التشخيص</p>
+        </header>
+        
+        <!-- Navigation Tabs -->
+        <div class="tabs-container">
+            <div class="tab active" onclick="switchTab('theory')">النظري</div>
+            <div class="tab" onclick="switchTab('disassembly')">التفكيك</div>
+            <div class="tab" onclick="switchTab('assembly')">التجميع</div>
+            <div class="tab" onclick="switchTab('safety')">السلامة</div>
+        </div>
+        
+        <!-- Theory Tab -->
+        <div class="tab-content active" id="theory">
+            <div class="device-image">
+                <i class="fas fa-heartbeat" style="font-size: 3rem; color: #94a3b8;"></i>
+            </div>
+            
+            <div class="section-title">
+                <i class="fas fa-info-circle"></i>
+                <span>معلومات عن الجهاز</span>
+            </div>
+            
+            <div class="theory-content">
+                <h3>ما هو جهاز تخطيط القلب؟</h3>
+                <p>جهاز تخطيط القلب الكهربائي (ECG) هو أداة طبية تستخدم لقياس وتسجيل النشاط الكهربائي للقلب. يساعد في تشخيص العديد من أمراض القلب المختلفة.</p>
+                
+                <h3>المكونات الرئيسية:</h3>
+                <p>• وحدة رئيسية للمعالجة<br>• أسلاك التوصيل<br>• أقطاب كهربائية<br>• شاشة عرض<br>• طابعة للتسجيل</p>
+                
+                <h3>مجالات الاستخدام:</h3>
+                <p>• تشخيص اضطرابات نظم القلب<br>• كشف النوبات القلبية<br>• مراقبة فعالية الأدوية<br>• فحص صحة القلب العامة</p>
+            </div>
+        </div>
+        
+        <!-- Disassembly Tab -->
+        <div class="tab-content" id="disassembly">
+            <div class="section-title">
+                <i class="fas fa-tools"></i>
+                <span>خطوات التفكيك</span>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>فصل الطاقة</h4>
+                        <p>افصل الجهاز من مصدر الكهرباء وتأكد من تفريغ الشحنات الكهربائية</p>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>إزالة الغطاء الخارجي</h4>
+                        <p>استخدم مفكات البراغي المناسبة لفتح الغطاء البلاستيكي للجهاز</p>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>فصل الوحدات الداخلية</h4>
+                        <p>افصل لوحة التحكم الرئيسية عن وحدة المعالجة وشاشة العرض</p>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>إزالة الأسلاك</h4>
+                        <p>قم بتوثيق مواقع الأسلاك ثم افصلها بحذر من المنافذ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Assembly Tab -->
+        <div class="tab-content" id="assembly">
+            <div class="section-title">
+                <i class="fas fa-puzzle-piece"></i>
+                <span>خطوات التجميع</span>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>تركيب الوحدات الأساسية</h4>
+                        <p>أعد تركيب لوحة التحكم الرئيسية ووحدة المعالجة في أماكنها</p>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>توصيل الأسلاك</h4>
+                        <p>استخدم الخريطة التي وثقتها لإعادة توصيل جميع الأسلاك</p>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>تركيب الغطاء</h4>
+                        <p>أغلق الغطاء البلاستيكي وثبته بالبراغي في أماكنها الصحيحة</p>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>الفحص النهائي</h4>
+                        <p>قم بتشغيل الجهاز وتأكد من عمل جميع الوظائف بشكل صحيح</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Safety Tab -->
+        <div class="tab-content" id="safety">
+            <div class="section-title">
+                <i class="fas fa-shield-alt"></i>
+                <span>إجراءات السلامة</span>
+            </div>
+            
+            <div class="safety-grid">
+                <div class="safety-card">
+                    <i class="fas fa-exclamation-triangle safety-icon"></i>
+                    <div class="step-content">
+                        <h4>فصل الكهرباء</h4>
+                        <p>تأكد من فصل الجهاز تماماً عن مصدر الكهرباء قبل البدء بأي عمل</p>
+                    </div>
+                </div>
+                
+                <div class="safety-card warning">
+                    <i class="fas fa-radiation-alt safety-icon"></i>
+                    <div class="step-content">
+                        <h4>تفريغ الشحنات</h4>
+                        <p>المكثفات قد تحتفظ بشحنات كهربائية خطيرة حتى بعد فصل التيار</p>
+                    </div>
+                </div>
+                
+                <div class="safety-card">
+                    <i class="fas fa-user-shield safety-icon"></i>
+                    <div class="step-content">
+                        <h4>استخدام الأدوات المناسبة</h4>
+                        <p>استخدم فقط الأدوات المعزولة والملائمة للعمل على الأجهزة الطبية</p>
+                    </div>
+                </div>
+                
+                <div class="safety-card">
+                    <i class="fas fa-hand-paper safety-icon"></i>
+                    <div class="step-content">
+                        <h4>التعامل بحذر</h4>
+                        <p>تجنب لمس الدوائر الإلكترونية مباشرة واستخدم القفازات الواقية</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="action-btn" onclick="startPractice()">
+                <i class="fas fa-play"></i>
+                بدء التدريب العملي
+            </button>
+            <button class="action-btn practice" onclick="takeTest()">
+                <i class="fas fa-graduation-cap"></i>
+                اختبار الجهاز
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Tab Switching Function
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // Practice Function
+        function startPractice() {
+            alert('سيتم فتح ورشة التدريب العملي على جهاز تخطيط القلب');
+        }
+        
+        // Test Function
+        function takeTest() {
+            alert('سيتم بدء اختبار جهاز تخطيط القلب');
+        }
+    </script>
+</body>
+</html>

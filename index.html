@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedBuild3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --secondary: #34a853;
+            --accent: #4285f4;
+            --medical-blue: #1e88e5;
+            --medical-green: #43a047;
+            --medical-teal: #00acc1;
+            --dark: #2c387e;
+            --light: #f8fdff;
+            --card-1: linear-gradient(135deg, #1e88e5 0%, #0d47a1 100%);
+            --card-2: linear-gradient(135deg, #43a047 0%, #1b5e20 100%);
+            --card-3: linear-gradient(135deg, #00acc1 0%, #006064 100%);
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --radius: 24px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .app-container {
+            width: 100%;
+            max-width: 440px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid #e3f2fd;
+        }
+        
+        /* Header */
+        .app-header {
+            background: linear-gradient(135deg, var(--medical-blue), var(--medical-teal));
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .settings-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .settings-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .app-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+        
+        .developer-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+        
+        .app-subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+            opacity: 0.9;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 40px 30px;
+            background: var(--light);
+        }
+        
+        .features-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .feature-card {
+            border-radius: 20px;
+            padding: 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card.theory {
+            background: var(--card-1);
+        }
+        
+        .feature-card.practice {
+            background: var(--card-2);
+        }
+        
+        .feature-card.tests {
+            background: var(--card-3);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .feature-content {
+            flex: 1;
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .feature-description {
+            font-size: 0.9rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        .feature-arrow {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        /* Footer */
+        .app-footer {
+            background: linear-gradient(135deg, #2c387e, #1a237e);
+            padding: 25px 30px;
+            text-align: center;
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .copyright {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .year {
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .app-container {
+                border-radius: 20px;
+            }
+            
+            .app-header {
+                padding: 30px 20px;
+            }
+            
+            .app-title {
+                font-size: 2.2rem;
+            }
+            
+            .main-content {
+                padding: 30px 20px;
+            }
+            
+            .feature-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <!-- زر الإعدادات المضاف -->
+            <a href="settings.html" class="settings-btn">
+                <i class="fas fa-ellipsis-v"></i>
+            </a>
+            
+            <div class="logo">
+                <i class="fas fa-stethoscope"></i>
+            </div>
+            <h1 class="app-title">MedBuild3D</h1>
+            <div class="developer-name">Saad Zaki Ibrahim</div>
+            <p class="app-subtitle">تفكيك الأجهزة الطبية</p>
+        </header>
+        
+        <main class="main-content">
+            <div class="features-grid">
+                <!-- زر النظري -->
+                <div class="feature-card theory" onclick="navigateTo('theory')">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-medical"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h2 class="feature-title">النظري</h2>
+                        <p class="feature-description">شروحات الأجهزة الطبية</p>
+                    </div>
+                    <div class="feature-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+                
+                <!-- زر العملي -->
+                <div class="feature-card practice" onclick="navigateTo('practice')">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h2 class="feature-title">العملي</h2>
+                        <p class="feature-description">تدريب تفكيك وتجميع</p>
+                    </div>
+                    <div class="feature-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+                
+                <!-- زر الاختبارات -->
+                <div class="feature-card tests" onclick="navigateTo('tests')">
+                    <div class="feature-icon">
+                        <i class="fas fa-star-of-life"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h2 class="feature-title">الاختبارات</h2>
+                        <p class="feature-description">أسئلة وتقييم المستوى</p>
+                    </div>
+                    <div class="feature-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="app-footer">
+            <div class="copyright">جميع الحقوق محفوظة لدى MedBuild3D</div>
+            <div class="year">© 2026</div>
+        </footer>
+    </div>
+
+    <script>
+        function navigateTo(section) {
+            const messages = {
+                'theory': 'فتح قسم الشروحات النظرية',
+                'practice': 'فتح ورشة العمل التدريبية', 
+                'tests': 'فتح قسم الاختبارات'
+            };
+            
+            // تأثير النقر
+            event.currentTarget.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                event.currentTarget.style.transform = '';
+            }, 150);
+            
+            // في التطبيق الحقيقي:
+            // window.location.href = `${section}.html`;
+        }
+    </script>
+</body>
+</html>
